@@ -110,3 +110,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Visual Studio Code
+.vscode/
+evaluacion-final-dazuluag.code-workspace
