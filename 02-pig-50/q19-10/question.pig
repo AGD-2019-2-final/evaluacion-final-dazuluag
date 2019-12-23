@@ -30,6 +30,6 @@ data = LOAD 'data.csv' USING PigStorage(',')
         quantity: INT
     );
 selected = FOREACH data GENERATE firstname, color;
-filtered = FILTER selected BY (color MATCHES 'b.*');
+filtered = FILTER selected BY (color MATCHES '^b.*');
 STORE filtered INTO 'output' USING PigStorage(',');
 fs -get output/ .;
