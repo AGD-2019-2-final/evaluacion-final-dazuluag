@@ -19,14 +19,18 @@
 -- 
 fs -rm -f -r output;
 --
-u = LOAD 'data.csv' USING PigStorage(',') 
-    AS (id:int, 
-        firstname:CHARARRAY, 
-        surname:CHARARRAY, 
-        birthday:CHARARRAY, 
-        color:CHARARRAY, 
-        quantity:INT);
---
--- >>> Escriba su respuesta a partir de este punto <<<
---
-
+fs -rm -f data.csv;
+fs -put data.csv;
+data = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        id: INT,
+        firstname: CHARARRAY,
+        lastname: CHARARRAY,
+        birthday: CHARARRAY,
+        color: CHARARRAY,
+        quantity: INT
+    );
+selected = FOREACH data GENERATE ToDate(birthday, 'yyyy-MM-dd') AS birthday_date;
+selected_1 = FOREACH selected GENERATE ToString(birthday_date, 'yyyy'), ToString(birthday_date, 'yy');
+STORE selected_1 INTO 'output' USING PigStorage(',');
+fs -get output/ .;
