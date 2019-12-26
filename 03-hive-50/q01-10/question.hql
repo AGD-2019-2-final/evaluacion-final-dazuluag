@@ -11,3 +11,19 @@
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
+DROP TABLE IF EXISTS datos;
+
+CREATE TABLE datos (
+    letra STRING,
+    fecha STRING,
+    valor INT
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES ('separatorChar' = "\t");
+
+LOAD DATA LOCAL INPATH "data.tsv" OVERWRITE INTO TABLE datos;
+
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+SELECT letra, COUNT(1) AS cantidad FROM datos GROUP BY letra ORDER BY letra;
