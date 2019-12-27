@@ -39,4 +39,13 @@ LOAD DATA LOCAL INPATH 'tbl1.csv' INTO TABLE tbl1;
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
-
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+SELECT v.year,v.vowel,COUNT(1) AS count
+FROM (
+    SELECT YEAR(c4) AS year, vowel
+    FROM tbl0 t0
+    LATERAL VIEW explode(t0.c5) tbl0 AS vowel
+) v 
+GROUP BY v.year,v.vowel;
