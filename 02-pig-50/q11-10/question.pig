@@ -28,8 +28,7 @@
 -- 
 fs -rm -f -r output;
 --
-fs -rm -f data.csv;
-fs -put data.csv;
+--fs -put -f data.csv;
 data = LOAD 'data.csv' USING PigStorage(',')
     AS (
         id: INT,
@@ -42,4 +41,4 @@ data = LOAD 'data.csv' USING PigStorage(',')
 selected = FOREACH data GENERATE lastname, UPPER(lastname), LOWER(lastname);
 ordered = ORDER selected BY lastname;
 STORE ordered INTO 'output' USING PigStorage(',');
-fs -get output/ .;
+--fs -get -f output/ .;

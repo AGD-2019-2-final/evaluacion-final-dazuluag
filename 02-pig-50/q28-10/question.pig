@@ -19,8 +19,7 @@
 -- 
 fs -rm -f -r output;
 --
-fs -rm -f data.csv;
-fs -put data.csv;
+--fs -put -f data.csv;
 data = LOAD 'data.csv' USING PigStorage(',')
     AS (
         id: INT,
@@ -33,4 +32,4 @@ data = LOAD 'data.csv' USING PigStorage(',')
 selected = FOREACH data GENERATE ToDate(birthday, 'yyyy-MM-dd') AS birthday_date;
 selected_1 = FOREACH selected GENERATE ToString(birthday_date, 'yyyy'), ToString(birthday_date, 'yy');
 STORE selected_1 INTO 'output' USING PigStorage(',');
-fs -get output/ .;
+--fs -get -f output/ .;

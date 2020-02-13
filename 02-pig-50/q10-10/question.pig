@@ -16,8 +16,7 @@
 -- 
 fs -rm -f -r output;
 --
-fs -rm -f data.csv;
-fs -put data.csv;
+--fs -put -f data.csv;
 data = LOAD 'data.csv' USING PigStorage(',')
     AS (
         id: INT,
@@ -31,4 +30,4 @@ selected = FOREACH data GENERATE lastname, SIZE(lastname) AS size;
 ordered = ORDER selected BY size DESC,lastname;
 limited = LIMIT ordered 5;
 STORE limited INTO 'output' USING PigStorage(',');
-fs -get output/ .;
+--fs -get -f output/ .;

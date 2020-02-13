@@ -27,8 +27,7 @@ fs -rm -f -r output;
 -- 
 --  >>> Escriba su respuesta a partir de este punto <<<
 -- 
-fs -rm -f truck_event_text_partition.csv
-fs -put truck_event_text_partition.csv
+--fs -put -f truck_event_text_partition.csv;
 data = LOAD 'truck_event_text_partition.csv' USING PigStorage(',')
     AS (
         driverId     :INT,
@@ -48,4 +47,4 @@ limited = LIMIT data 10;
 selected = FOREACH limited GENERATE driverId, truckId, eventTime;
 ordered = ORDER selected BY driverId, truckId, eventTime;
 STORE ordered INTO 'output' USING PigStorage(',');
-fs -get output/ .
+--fs -get -f output/ .;

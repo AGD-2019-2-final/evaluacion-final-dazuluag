@@ -30,8 +30,7 @@
 -- 
 fs -rm -f -r output;
 --
-fs -rm -f data.csv;
-fs -put data.csv;
+--fs -put -f data.csv;
 data = LOAD 'data.csv' USING PigStorage(',')
     AS (
         id: INT,
@@ -64,4 +63,4 @@ selected_1 = FOREACH selected GENERATE birthday,
                     WHEN 'Saturday' THEN 'sabado'
                     ELSE '' END);
 STORE selected_1 INTO 'output' USING PigStorage(',');
-fs -get output/ .;
+--fs -get -f output/ .;

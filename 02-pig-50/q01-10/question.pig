@@ -9,8 +9,7 @@ fs -rm -f -r output;
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
-fs -rm -f data.tsv
-fs -put data.tsv
+--fs -put -f data.tsv;
 data = LOAD 'data.tsv' USING PigStorage()
     AS (
         letter:CHARARRAY,
@@ -20,4 +19,4 @@ data = LOAD 'data.tsv' USING PigStorage()
 grouped = GROUP data BY letter;
 counted = FOREACH grouped GENERATE group AS letter, COUNT(data) AS count;
 STORE counted INTO 'output';
-fs -get output/ .
+--fs -get -f output/ .;

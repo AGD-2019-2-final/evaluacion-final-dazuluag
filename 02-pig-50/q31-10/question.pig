@@ -10,8 +10,7 @@
 -- 
 fs -rm -f -r output;
 -- 
-fs -rm -f data.csv;
-fs -put data.csv;
+--fs -put -f data.csv;
 data = LOAD 'data.csv' USING PigStorage(',')
     AS (
         id: INT,
@@ -25,4 +24,4 @@ selected = FOREACH data GENERATE ToString(ToDate(birthday, 'yyyy-MM-dd'), 'yyyy'
 grouped = GROUP selected BY year;
 counted = FOREACH grouped GENERATE group, COUNT(selected) AS count;
 STORE counted INTO 'output' USING PigStorage(',');
-fs -get output/ .;
+--fs -get -f output/ .;

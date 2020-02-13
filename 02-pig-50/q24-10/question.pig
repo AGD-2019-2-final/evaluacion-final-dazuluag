@@ -15,8 +15,7 @@
 -- 
 fs -rm -f -r output;
 --
-fs -rm -f data.csv;
-fs -put data.csv;
+--fs -put -f data.csv;
 data = LOAD 'data.csv' USING PigStorage(',')
     AS (
         id: INT,
@@ -28,4 +27,4 @@ data = LOAD 'data.csv' USING PigStorage(',')
     );
 selected = FOREACH data GENERATE REGEX_EXTRACT(birthday, '(\\d{4})-(\\d{1,2})-(\\d{1,2})', 2);
 STORE selected INTO 'output' USING PigStorage();
-fs -get output/ .;
+--fs -get -f output/ .;

@@ -12,8 +12,7 @@ fs -rm -f -r output;
 --
 -- >>> Escriba su respuesta a partir de este punto <<<
 --
-fs -rm -f data.tsv;
-fs -put data.tsv;
+--fs -put -f data.tsv;
 data = LOAD 'data.tsv' USING PigStorage()
     AS (
         f1:CHARARRAY, 
@@ -23,4 +22,4 @@ data = LOAD 'data.tsv' USING PigStorage()
 selected = FOREACH data GENERATE f1, SIZE(f2) AS f2_size, SIZE(f3) AS f3_size;
 ordered = ORDER selected BY f1, f2_size, f3_size;
 STORE ordered INTO 'output' USING PigStorage(',');
-fs -get output/ .;
+--fs -get -f output/ .;
