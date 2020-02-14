@@ -1,6 +1,6 @@
-_grade: 4.69
+_grade: 5.0
 _score: 100
-date: '2020-02-13 09:05:26.789846'
+date: '2020-02-14 22:42:50.126330'
 tree:
   00-hola_mundo-10/:
     _grade: 5.0
@@ -11,7 +11,7 @@ tree:
         _score: 10
         tree: 5.0
   01-hadoop-50/:
-    _grade: 4.0
+    _grade: 5.0
     _score: 50
     tree:
       q01-10/:
@@ -39,17 +39,17 @@ tree:
         _score: 10
         tree: 5.0
       q07-10/:
-        _grade: 0.0
+        _grade: 5.0
         _score: 10
-        tree: 0.0
+        tree: 5.0
       q08-10/:
         _grade: 5.0
         _score: 10
         tree: 5.0
       q09-10/:
-        _grade: 0.0
+        _grade: 5.0
         _score: 10
-        tree: 0.0
+        tree: 5.0
       q10-10/:
         _grade: 5.0
         _score: 10
@@ -234,4 +234,4 @@ tree:
         _grade: 5.0
         _score: 10
         tree: 5.0
-2020-02-13 09:05:26.977241
+2020-02-14 22:42:50.290013
